@@ -1,0 +1,6 @@
+rippled_ssl_cert: false
+rippled_ssl_key: false
+rippled_data_root: /var/lib/rippled
+rippled_log_file: /var/log/rippled/rippled.log
+rippled_ledger_history: false
+rippled_ssl_verify: 0

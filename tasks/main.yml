@@ -1,0 +1,29 @@
+---
+- name: Install apt repo
+  apt_repository: repo='deb http://mirrors.ripple.com/ubuntu/ trusty stable contrib'
+- name: Install apt repo key
+  apt_key: url=http://mirrors.ripple.com/mirrors.ripple.com.gpg.key
+- name: Install rippled
+  apt: update_cache=true name=rippled
+- name: Make rippled data directories
+  file: state=directory owner=rippled group=rippled path={{rippled_data_root}}
+
+- name: Configure rippled
+  template: src=rippled.cfg dest=/etc/rippled/rippled.cfg
+
+- name: Add ssl cert
+  copy: src={{rippled_ssl_cert}} dest=/etc/rippled/certs/rippled.crt owner=rippled group=rippled mode="u=rw,g=r,o=r"
+  only_if: rippled_ssl_cert
+- name: Add ssl key
+  copy: src={{rippled_ssl_key}} dest=/etc/rippled/certs/rippled.key owner=rippled group=rippled mode="u=rw,g=r,o=r"
+  only_if: rippled_ssl_key
+
+- name: Stop rippled
+  service: name=rippled state=stopped
+  ignore_errors: true
+- name: Wait for rippled to become available
+  wait_for: state=drained port=51234
+- name: Start rippled
+  command: service rippled start
+- name: Wait for rippled to become available
+  wait_for: port=51234

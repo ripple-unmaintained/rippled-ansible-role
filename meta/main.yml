@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: tdfischer
+  company: Ripple Labs
+  description: Rippled role
+  license: MIT
+  min_ansible_version: 1.7
+  platforms:
+    - name: Ubuntu
+      versions:
+        - precise
+  categories:
+    - packaging
+dependencies: []
+version: 0.0.0
