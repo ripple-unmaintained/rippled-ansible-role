@@ -9,6 +9,28 @@ An Ansible role for installing and running rippled
 
 This role is currently only supported on Ubuntu 14.02 LTS.
 
+## Usage
+
+### Ansible Galaxy
+
+```
+$ ansible-galaxy install ripple.rippled
+```
+
+### Git Submodules
+
+```
+$ git submodule add git://github.com/ripple/rippled-ansible-role roles/rippled
+
+### Example Playbook
+
+```
+- hosts: rippled
+  roles:
+    - { role: rippled }
+```
+
+
 ## Role Variables
 
 - `rippled_data_root`: Where rippled will save its database (default:
@@ -32,14 +54,6 @@ This role is currently only supported on Ubuntu 14.02 LTS.
   (default: none)
 - `rippled_ssl_verify`: Whether rippled should verify peer SSL certificates
   (default: `false`)
-
-## Example Playbook
-
-```
-- hosts: rippled
-  roles:
-    - { role: rippled }
-```
 
 ## License
 
