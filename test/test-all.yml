@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  connection: local
+  sudo: true
+  roles:
+    - rippled
+  tasks:
+    - name: Verify rippled is running
+      wait_for: port=51234 state=started

@@ -1,0 +1,6 @@
+machine:
+  services:
+    - docker
+test:
+  override:
+    - ansible-playbook -i test/inventory.txt test/test-all.yml
