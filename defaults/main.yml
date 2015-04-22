@@ -5,3 +5,5 @@ rippled_log_file: /var/log/rippled/rippled.log
 rippled_ledger_history: false
 rippled_ssl_verify: 0
 rippled_validation_quorum: false
+rippled_config_template: rippled.cfg
+rippled_run_service: true
