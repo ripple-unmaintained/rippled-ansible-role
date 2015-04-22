@@ -13,10 +13,10 @@
 
 - name: Add ssl cert
   copy: src={{rippled_ssl_cert}} dest=/etc/rippled/certs/rippled.crt owner=rippled group=rippled mode="u=rw,g=r,o=r"
-  only_if: rippled_ssl_cert
+  when: rippled_ssl_cert
 - name: Add ssl key
   copy: src={{rippled_ssl_key}} dest=/etc/rippled/certs/rippled.key owner=rippled group=rippled mode="u=rw,g=r,o=r"
-  only_if: rippled_ssl_key
+  when: rippled_ssl_key
 
 - name: Stop rippled
   service: name=rippled state=stopped
