@@ -21,6 +21,7 @@ $ ansible-galaxy install ripple.rippled
 
 ```
 $ git submodule add git://github.com/ripple/rippled-ansible-role roles/rippled
+```
 
 ### Example Playbook
 
