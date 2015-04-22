@@ -1,8 +1,9 @@
 ---
 - name: Install apt repo
-  apt_repository: repo='deb http://mirrors.ripple.com/ubuntu/ trusty stable contrib'
+  apt_repository: repo='deb [arch=amd64] http://mirrors.ripple.com/ubuntu/ trusty stable contrib'
 - name: Install apt repo key
   apt_key: url=http://mirrors.ripple.com/mirrors.ripple.com.gpg.key
+
 - name: Install rippled
   apt: update_cache=true name=rippled
 - name: Make rippled data directories
