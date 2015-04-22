@@ -10,4 +10,4 @@ dependencies:
     - sudo apt-get install -qq ansible
 test:
   override:
-    - ansible-playbook -i test/inventory.txt test/test-all.yml
+    - docker run -v `pwd`:/root/test/ ansible/ubuntu14.04-ansible ansible-playbook -i /root/test/test/inventory.txt /root/test/test/test-all.yml
