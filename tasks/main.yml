@@ -22,13 +22,13 @@
 - name: Stop rippled
   service: name=rippled state=stopped
   ignore_errors: true
-  when: rippled_run_service
+  when: rippled_run_service == true
 - name: Wait for rippled to become available
   wait_for: state=drained port=51234
-  when: rippled_run_service
+  when: rippled_run_service == true
 - name: Start rippled
   command: service rippled start
-  when: rippled_run_service
+  when: rippled_run_service == true
 - name: Wait for rippled to become available
   wait_for: port=51234
-  when: rippled_run_service
+  when: rippled_run_service == true
