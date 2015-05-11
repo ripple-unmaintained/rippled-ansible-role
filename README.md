@@ -47,6 +47,7 @@ $ git submodule add git://github.com/ripple/rippled-ansible-role roles/rippled
 - `rippled_run_service`: If this role should manage the rippled service. Set to
   `false` to not have this role start/stop/reload the rippled service.
   (default: `true`)
+- `rippled_package_state`: Same as the state parameter to ansible's apt module.
 
 ### SSL
 - `rippled_ssl_cert`: Path to the SSL cert to be installed on the server

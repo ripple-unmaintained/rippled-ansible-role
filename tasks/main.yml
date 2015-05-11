@@ -5,7 +5,7 @@
   apt_key: url=http://mirrors.ripple.com/mirrors.ripple.com.gpg.key
 
 - name: Install rippled
-  apt: update_cache=true name=rippled
+  apt: update_cache=true name=rippled state={{rippled_package_state}}
 - name: Make rippled data directories
   file: state=directory owner=rippled group=rippled path={{rippled_data_root}}
 

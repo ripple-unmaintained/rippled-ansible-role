@@ -7,3 +7,4 @@ rippled_ssl_verify: 1
 rippled_validation_quorum: false
 rippled_config_template: rippled.cfg
 rippled_run_service: true
+rippled_package_state: present
