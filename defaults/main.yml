@@ -19,4 +19,5 @@ rippled_validators_site: false
 rippled_ssl_verify: 1
 rippled_database_path: /var/lib/rippled
 rippled_online_delete: false
+rippled_advisory_delete: false
 rippled_debug_logfile: /var/log/rippled/rippled.log

@@ -68,6 +68,8 @@ $ git submodule add git://github.com/ripple/rippled-ansible-role roles/rippled
   `/var/lib/rippled`)
 - `rippled_online_delete`: Enable automatic purging of older ledger information.
   Maintain at least this number of ledger records online (default: none)
+- 'rippled_advisory_delete': Require administrative RPC call "can_delete" to
+  enable online deletion of ledger records (default: none)
 - `rippled_debug_logfile`: Location of the rippled log file (default:
   `/var/log/rippled/rippled.log`)
 
