@@ -12,6 +12,9 @@
 - name: Configure rippled
   template: src={{rippled_config_template}} dest=/etc/rippled/rippled.cfg
 
+- name: Make rippled certs directories
+  file: state=directory owner=rippled group=rippled path=/etc/rippled/certs
+  when: rippled_ssl_cert or rippled_ssl_key
 - name: Add ssl cert
   copy: src={{rippled_ssl_cert}} dest=/etc/rippled/certs/rippled.crt owner=rippled group=rippled mode="u=rw,g=r,o=r"
   when: rippled_ssl_cert
