@@ -34,28 +34,54 @@ $ git submodule add git://github.com/ripple/rippled-ansible-role roles/rippled
 
 ## Role Variables
 
-- `rippled_data_root`: Where rippled will save its database (default:
-  `/var/lib/rippled`)
-- `rippled_log_file`: Location of the rippled log file (default:
-  `/var/log/rippled/rippled.log`)
-- `rippled_ledger_history`: How much ledger history rippled should store
-  (default: all)
-- `rippled_validation_quorum`: Desired quorum (default: whatever rippled's
-  default is)
+- `rippled_run_service`: If this role should manage the rippled service. Set to
+  `false` to not have this role start/stop/reload the rippled service
+  (default: `true`)
+- `rippled_package_state`: Same as the state parameter to ansible's apt module
+  (default: `present`)
 - `rippled_config_template`: Template to write to /etc/rippled/rippled.cfg
   (default: the included `rippled.cfg`)
-- `rippled_run_service`: If this role should manage the rippled service. Set to
-  `false` to not have this role start/stop/reload the rippled service.
-  (default: `true`)
-- `rippled_package_state`: Same as the state parameter to ansible's apt module.
+- `rippled_rpc_startup`: List of RPC commands to run at startup (default: none)
+- `rippled_ips`: List of hostnames or ips where the Ripple protocol is served
+  (default: `[ r.ripple.com 51235 ]`)
+- `rippled_ips_fixed`: List of IP addresses or hostnames to which rippled should
+  always attempt to maintain peer connections with (default: `none`)
+- `rippled_peer_private`: Whether rippled should request peers to not broadcast
+  your address (default: `0`)
+- `rippled_peers_max`: The largest number of desired peer connections
+  (default: implementation-defined lower limit)
+- `rippled_node_size`: Tunes the servers based on the expected load and
+  available memory (default: `tiny`)
+- `rippled_validation_quorum`: the minimum number of trusted validations a
+  ledger must have before the server considers it fully validated (default: `0`)
+- `rippled_ledger_history`: The number of past ledgers to acquire on server
+  startup and the minimum to maintain while running (default: `256`)
+- `rippled_fetch_depth`: The number of past ledgers to serve to other peers that
+  request historical ledger data (default: `full` (no limit))
+- `rippled_validation_seed`: Either a validation seed or key to perform
+  validation (default: none)
+- `rippled_validators`: List of nodes to always accept as validators
+  (default: none)
+- `rippled_validators_site`: Specifies where to find validators.txt for UNL
+  boostrapping and RPC unl_network command (default: none)
+- `rippled_database_path`: Where rippled will save its database (default:
+  `/var/lib/rippled`)
+- `rippled_online_delete`: Enable automatic purging of older ledger information.
+  Maintain at least this number of ledger records online (default: none)
+- 'rippled_advisory_delete': Require administrative RPC call "can_delete" to
+  enable online deletion of ledger records (default: none)
+- `rippled_debug_logfile`: Location of the rippled log file (default:
+  `/var/log/rippled/rippled.log`)
 
 ### SSL
 - `rippled_ssl_cert`: Path to the SSL cert to be installed on the server
   (default: none)
+- `rippled_ssl_chain`: Path to the SSL chain cert to be installed on the server
+  (default: none)
 - `rippled_ssl_key`: Path to the SSL private key to be installed on the server
   (default: none)
 - `rippled_ssl_verify`: Whether rippled should verify peer SSL certificates
-  (default: `false`)
+  (default: `1`)
 
 ## License
 
