@@ -9,4 +9,4 @@
     - rippled
   tasks:
     - name: Verify rippled is running
-      wait_for: port=51234 state=started
+      wait_for: port=5005 state=started

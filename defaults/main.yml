@@ -1,6 +1,9 @@
-rippled_run_service: true
+rippled_start_mode: net
 rippled_package_state: present
 rippled_config_template: rippled.cfg
+rippled_port_wss_public: false
+rippled_port_rpc: false
+rippled_port_rpc_admin: true
 rippled_ssl_cert: false
 rippled_ssl_chain: false
 rippled_ssl_key: false
@@ -17,7 +20,9 @@ rippled_validation_seed: false
 rippled_validators: false
 rippled_validators_site: false
 rippled_ssl_verify: 1
-rippled_database_path: /var/lib/rippled
+rippled_node_db_type: rocksdb
+rippled_node_db_path: /var/lib/rippled
 rippled_online_delete: false
 rippled_advisory_delete: false
 rippled_debug_logfile: /var/log/rippled/rippled.log
+rippled_cluster_nodes: false

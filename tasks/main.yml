@@ -7,7 +7,7 @@
 - name: Install rippled
   apt: update_cache=true name=rippled state={{rippled_package_state}}
 - name: Make rippled data directories
-  file: state=directory owner=rippled group=rippled path={{rippled_database_path}}
+  file: state=directory owner=rippled group=rippled path={{rippled_node_db_path}}
 
 - name: Configure rippled
   template: src={{rippled_config_template}} dest=/etc/rippled/rippled.cfg
@@ -28,13 +28,25 @@
 - name: Stop rippled
   service: name=rippled state=stopped
   ignore_errors: true
-  when: rippled_run_service == true
+  when: rippled_start_mode != false
 - name: Wait for rippled to become available
   wait_for: state=drained port=51234
-  when: rippled_run_service == true
+  when: rippled_start_mode != false and rippled_port_rpc
+- name: Wait for rippled to become available
+  wait_for: state=drained port=5005
+  when: rippled_start_mode != false and rippled_port_rpc_admin
 - name: Start rippled
   command: service rippled start
-  when: rippled_run_service == true
+  when: rippled_start_mode=='net'
+- name: Start rippled at fresh ledger
+  command: start-stop-daemon --start --quiet --background -m --pidfile /var/run/rippled.pid --exec /usr/bin/rippled --chuid rippled --group rippled -- --start --conf /etc/rippled/rippled.cfg
+  when: rippled_start_mode=='start'
+- name: Start rippled at the current ledger from the local DB
+  command: start-stop-daemon --start --quiet --background -m --pidfile /var/run/rippled.pid --exec /usr/bin/rippled --chuid rippled --group rippled -- --load --conf /etc/rippled/rippled.cfg
+  when: rippled_start_mode=='load'
 - name: Wait for rippled to become available
   wait_for: port=51234
-  when: rippled_run_service == true
+  when: rippled_start_mode != false and rippled_port_rpc
+- name: Wait for rippled to become available
+  wait_for: port=5005
+  when: rippled_start_mode != false and rippled_port_rpc_admin

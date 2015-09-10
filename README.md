@@ -34,13 +34,17 @@ $ git submodule add git://github.com/ripple/rippled-ansible-role roles/rippled
 
 ## Role Variables
 
-- `rippled_run_service`: If this role should manage the rippled service. Set to
-  `false` to not have this role start/stop/reload the rippled service
-  (default: `true`)
+- `rippled_start_mode`: In what mode to run rippled service. Set to `false` to
+  not have this role start/stop/reload the rippled service (default: `net`)
 - `rippled_package_state`: Same as the state parameter to ansible's apt module
   (default: `present`)
 - `rippled_config_template`: Template to write to /etc/rippled/rippled.cfg
   (default: the included `rippled.cfg`)
+- `rippled_port_rpc`: Allow rpc requests on port 51234 (default: false)
+- `rippled_port_rpc_admin`: Allow admin rpc requests locally on port 5005
+  (default: true)
+- `rippled_port_wss_public`: Allow websocket connections on port 51233
+  (default: false)
 - `rippled_rpc_startup`: List of RPC commands to run at startup (default: none)
 - `rippled_ips`: List of hostnames or ips where the Ripple protocol is served
   (default: `[ r.ripple.com 51235 ]`)
@@ -64,7 +68,8 @@ $ git submodule add git://github.com/ripple/rippled-ansible-role roles/rippled
   (default: none)
 - `rippled_validators_site`: Specifies where to find validators.txt for UNL
   boostrapping and RPC unl_network command (default: none)
-- `rippled_database_path`: Where rippled will save its database (default:
+- `rippled_node_db_type`: Rippled database type (default: `rocksdb`)
+- `rippled_node_db_path`: Where rippled will save its database (default:
   `/var/lib/rippled`)
 - `rippled_online_delete`: Enable automatic purging of older ledger information.
   Maintain at least this number of ledger records online (default: none)
@@ -72,6 +77,8 @@ $ git submodule add git://github.com/ripple/rippled-ansible-role roles/rippled
   enable online deletion of ledger records (default: none)
 - `rippled_debug_logfile`: Location of the rippled log file (default:
   `/var/log/rippled/rippled.log`)
+- `rippled_cluster_nodes`: List of node public keys to extend full trust to
+  (default: none)
 
 ### SSL
 - `rippled_ssl_cert`: Path to the SSL cert to be installed on the server
