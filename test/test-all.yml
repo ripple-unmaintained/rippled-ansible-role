@@ -2,6 +2,9 @@
 - hosts: localhost
   connection: local
   sudo: true
+  pre_tasks:
+    - name: Install rippled
+      apt: name=apt-transport-https
   roles:
     - rippled
   tasks:
